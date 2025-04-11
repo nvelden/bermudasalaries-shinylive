@@ -1,0 +1,27 @@
+# Setup new python shiny project
+1. File > New project > As github project
+2. touch app.py
+3. To create a virtual environment:
+    >python3 -m venv .venv
+    >source .venv/bin/activate
+Run pip list to see all available packages
+In terminal should start with (.venv)
+4. Install shiny
+    >pip install shiny
+5. Make app.py 
+    >touch app.py
+# Shinylive 
+1. Install Shinylive
+    >pip install Shinylive
+2. Export app to static website. Export to doc folder to use in github
+    >shinylive export . doc
+    When extra files:
+    >cp salaries.csv doc/
+3. To install extra packages see example: https://shinylive.io/py/examples/#extra-packages
+3. Start a shinylive server
+    >python3 -m http.server --directory doc 8008
+Go to http://localhost:8008 to see website or http://localhost:8008/edit/     
+4. Stop a shinylive server
+    >lsof -i :008
+5. Remove  old cached shinylive files
+   >shinylive assets remove    
