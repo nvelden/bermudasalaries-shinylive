@@ -18,7 +18,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install shinylive
+      - name: Install Shinylive
         run: pip install --upgrade shinylive
 
       - name: Export Shinylive app to docs/
