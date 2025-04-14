@@ -46,6 +46,14 @@ def filtered_data():
         input.salary_range()
     )
 
+@reactive.calc
+def formatted_data_for_table():
+    d = filtered_data().copy()
+    for col in ["Job Min Annual", "Job Max Annual"]:
+        if col in d.columns:
+            d[col] = d[col].apply(lambda x: f"${x:,.0f}" if pd.notnull(x) else "")
+    return d
+
 # UI layout
 ui.page_opts(title="Bermuda Gov Salaries", fillable=True, theme=theme.yeti)
 
@@ -167,7 +175,7 @@ with ui.card(full_screen=True, scrollable=True):
     @render_widget
     def my_table():
         return ITable(
-            filtered_data(),
+            formatted_data_for_table(),
             style = "width:100%; height: auto !important",
             showIndex = False, 
             scrollY="45vh", 
@@ -179,9 +187,6 @@ with ui.card(full_screen=True, scrollable=True):
     @reactive.effect
     def _():
         my_table.widget.update(
-            filtered_data(),
-                maxBytes="128KB",
-                showIndex = False)
-
-    
- 
+            formatted_data_for_table(),
+            maxBytes="128KB",
+            showIndex = False)
