@@ -53,6 +53,7 @@ ui.head_content(
     ui.tags.link(
         rel="icon",
         type="image/x-icon",
+        sizes="16x16",
         href="favicon.ico"
     )
 )
