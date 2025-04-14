@@ -54,7 +54,7 @@ ui.head_content(
         rel="icon",
         type="image/x-icon",
         sizes="16x16",
-        href="favicon.ico"
+        href="www/favicon.ico"
     )
 )
 
