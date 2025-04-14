@@ -49,6 +49,14 @@ def filtered_data():
 # UI layout
 ui.page_opts(title="Bermuda Gov Salaries", fillable=True, theme=theme.yeti)
 
+ui.head_content(
+    ui.tags.link(
+        rel="icon",
+        type="image/x-icon",
+        href="favicon.ico"
+    )
+)
+
 with ui.sidebar():
     ui.input_slider(
        "salary_range",

@@ -4,3 +4,5 @@ import pandas as pd
 
 app_dir = Path(__file__).parent
 df = pd.read_csv(app_dir / "salaries.csv")
+
+
