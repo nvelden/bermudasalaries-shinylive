@@ -69,6 +69,10 @@ ui.head_content(
         async_="true",
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4337721684173660",
         crossorigin="anonymous"
+    ),
+    ui.tags.meta(
+        name="google-adsense-account",
+        content="ca-pub-4337721684173660"
     )
 )
 
