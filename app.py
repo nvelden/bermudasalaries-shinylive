@@ -61,9 +61,14 @@ ui.head_content(
         sizes="16x16",
         href="favicon.ico"
     ),
-        ui.tags.link(
+    ui.tags.link(
         rel="stylesheet",
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+    ),
+    ui.tags.script(
+        async_="true",
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4337721684173660",
+        crossorigin="anonymous"
     )
 )
 
