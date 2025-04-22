@@ -78,7 +78,7 @@ ui.head_content(
 
 # UI layout
 ui.page_opts(
-    title="Bermuda Government Salaries",
+    # title="Bermuda Government Salaries",
     fillable=True,
     id="page",
     theme=theme.yeti
