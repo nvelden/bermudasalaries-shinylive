@@ -216,21 +216,21 @@ with ui.nav_panel(" "):
                 showIndex=False
             )
 
-ui.nav_spacer()
+# ui.nav_spacer()
 
-with ui.nav_control():
-    # GitHub icon
-    ui.a(
-        ui.tags.i(class_="bi bi-github fs-4"),
-        href="https://github.com/nvelden/bermudasalaries-shinylive",
-        target="_blank",
-        title="View on GitHub"
-    )
-with ui.nav_control():
-    # LinkedIn icon
-    ui.a(
-        ui.tags.i(class_="bi bi-linkedin fs-4"),
-        href="https://www.linkedin.com/in/nielsva/",
-        target="_blank",
-        title="Connect on LinkedIn"
-    )
+# with ui.nav_control():
+#     # GitHub icon
+#     ui.a(
+#         ui.tags.i(class_="bi bi-github fs-4"),
+#         href="https://github.com/nvelden/bermudasalaries-shinylive",
+#         target="_blank",
+#         title="View on GitHub"
+#     )
+# with ui.nav_control():
+#     # LinkedIn icon
+#     ui.a(
+#         ui.tags.i(class_="bi bi-linkedin fs-4"),
+#         href="https://www.linkedin.com/in/nielsva/",
+#         target="_blank",
+#         title="Connect on LinkedIn"
+#     )
