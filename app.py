@@ -118,119 +118,98 @@ with ui.sidebar():
        style="font-size: 0.8em; color: gray; margin-top: 1rem;"
     )
 
-with ui.nav_panel(" "):
-    with ui.layout_columns(fill=False):
+with ui.layout_columns(fill=False):
+    with ui.value_box():
+        "Median Salary"
 
-        with ui.value_box():
-            "Median Salary"
+        @render.express
+        def median_salary():
+            d = filtered_data()
+            if d.empty:
+                return "N/A"
+            else:
+                min_vals = d["Job Min Annual"]
+                max_vals = d["Job Max Annual"]
 
-            @render.express
-            def median_salary():
-                d = filtered_data()
-                if d.empty:
-                    "N/A"
-                else:
-                    min_vals = d["Job Min Annual"]
-                    max_vals = d["Job Max Annual"]
+                median_vals = pd.concat([
+                    ((min_vals + max_vals) / 2).dropna(),
+                    min_vals[max_vals.isna()],
+                    max_vals[min_vals.isna()]
+                ])
 
-                    median_vals = pd.concat([
-                        ((min_vals + max_vals) / 2).dropna(),
-                        min_vals[max_vals.isna()],
-                        max_vals[min_vals.isna()]
-                    ])
+                f"${median_vals.median():,.0f}"
 
-                    f"${median_vals.median():,.0f}"
+    with ui.value_box():
+        "Average Salary"
 
-        with ui.value_box():
-            "Average Salary"
+        @render.express
+        def avg_salary():
+            d = filtered_data()
+            if d.empty:
+                "N/A"
+            else:
+                min_vals = d["Job Min Annual"]
+                max_vals = d["Job Max Annual"]
 
-            @render.express
-            def avg_salary():
-                d = filtered_data()
-                if d.empty:
-                    "N/A"
-                else:
-                    min_vals = d["Job Min Annual"]
-                    max_vals = d["Job Max Annual"]
+                avg_vals = pd.concat([
+                    ((min_vals + max_vals) / 2).dropna(),
+                    min_vals[max_vals.isna()],
+                    max_vals[min_vals.isna()]
+                ])
 
-                    avg_vals = pd.concat([
-                        ((min_vals + max_vals) / 2).dropna(),
-                        min_vals[max_vals.isna()],
-                        max_vals[min_vals.isna()]
-                    ])
+                f"${avg_vals.mean():,.0f}"
 
-                    f"${avg_vals.mean():,.0f}"
+    with ui.value_box():
+        "Min Salary"
 
-        with ui.value_box():
-            "Min Salary"
+        @render.express
+        def min_salary_():
+            d = filtered_data()
+            if d.empty:
+                "N/A"
+            else:
+                combined_min = pd.concat([
+                    d["Job Min Annual"].dropna(),
+                    d["Job Max Annual"].dropna()
+                ])
 
-            @render.express
-            def min_salary_():
-                d = filtered_data()
-                if d.empty:
-                    "N/A"
-                else:
-                    combined_min = pd.concat([
-                        d["Job Min Annual"].dropna(),
-                        d["Job Max Annual"].dropna()
-                    ])
+                "N/A" if combined_min.empty else f"${combined_min.min():,.0f}"
 
-                    "N/A" if combined_min.empty else f"${combined_min.min():,.0f}"
+    with ui.value_box():
+        "Max Salary"
 
-        with ui.value_box():
-            "Max Salary"
+        @render.express
+        def max_salary_():
+            d = filtered_data()
+            if d.empty:
+                "N/A"
+            else:
+                combined_max = pd.concat([
+                    d["Job Min Annual"].dropna(),
+                    d["Job Max Annual"].dropna()
+                ])
 
-            @render.express
-            def max_salary_():
-                d = filtered_data()
-                if d.empty:
-                    "N/A"
-                else:
-                    combined_max = pd.concat([
-                        d["Job Min Annual"].dropna(),
-                        d["Job Max Annual"].dropna()
-                    ])
+                "N/A" if combined_max.empty else f"${combined_max.max():,.0f}"
 
-                    "N/A" if combined_max.empty else f"${combined_max.max():,.0f}"
-
-    # Table below the value boxes
+# Table below the value boxes
+with ui.layout_columns(fill=True):    
     with ui.card(full_screen=True, scrollable=True):
-
         @render_widget
         def my_table():
             return ITable(
-                formatted_data_for_table(),
-                style="width:100%; height: auto !important",
-                showIndex=False,
-                scrollY="45vh",
-                scrollCollapse=True,
-                lengthMenu=[25, 50, 100],
-                paging=True
+            formatted_data_for_table(),
+            style="width:100%; height: auto !important",
+            showIndex=False,
+            scrollY="45vh",
+            scrollCollapse=True,
+            lengthMenu=[25, 50, 100],
+            paging=True
             )
-
+        
         @reactive.effect
         def _():
             my_table.widget.update(
-                formatted_data_for_table(),
-                maxBytes="128KB",
-                showIndex=False
-            )
-
-# ui.nav_spacer()
-
-# with ui.nav_control():
-#     # GitHub icon
-#     ui.a(
-#         ui.tags.i(class_="bi bi-github fs-4"),
-#         href="https://github.com/nvelden/bermudasalaries-shinylive",
-#         target="_blank",
-#         title="View on GitHub"
-#     )
-# with ui.nav_control():
-#     # LinkedIn icon
-#     ui.a(
-#         ui.tags.i(class_="bi bi-linkedin fs-4"),
-#         href="https://www.linkedin.com/in/nielsva/",
-#         target="_blank",
-#         title="Connect on LinkedIn"
-#     )
+            formatted_data_for_table(),
+            maxBytes="128KB",
+            showIndex=False
+        )
